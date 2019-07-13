@@ -1,0 +1,28 @@
+[user]
+	email = sergey.pakhomov.89@gmail.com
+	name = Sergey Pakhomov
+[credential]
+	helper = cache --timeout=259200
+[alias]
+        co = checkout
+        ci = commit
+        st = status
+        br = branch
+        brv = branch -vvaa
+        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+        last = log -1
+        type = cat-file -t
+        dump = cat-file -p
+	rh = reset --hard
+[push]
+	default = matching # или simple как будет в версии 2.0
+[core]
+	editor = vim
+	quotepath = false # решение проблем с русскими буквами файлов
+
+[url "git://anongit.kde.org/"]
+	insteadOf = kde:
+[url "ssh://git@git.kde.org/"]
+	pushInsteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
