@@ -1,0 +1,5 @@
+Reload config on the fly:
+> source /home/user/.tmux.conf
+
+Exit/Kill/Finish session:
+> kill-session
