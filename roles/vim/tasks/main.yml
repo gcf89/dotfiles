@@ -1,0 +1,51 @@
+- name: Install system packages (dnf)
+  dnf:
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'dnf'
+  tags:
+    - vim
+
+- name: Install system packages (yum)
+  yum:
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'yum'
+  tags:
+    - vim
+
+- name: Install system packages (apt)
+  apt:
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'apt'
+  tags:
+    - vim
+
+- name: Install python packages (pip)
+  pip:
+    name: ['pyflakes', 'pep8', 'pylint', 'ipython']
+  tags:
+    - vim
+
+- name: Install Vundle
+  git:
+    repo: https://github.com/gmarik/Vundle.vim.git
+    dest: "{{ item }}/.vim/bundle/Vundle.vim"
+  with_items: "{{ homedirs }}"
+  tags:
+    - vim
+
+- name: Install vimrc
+  template:
+    src: .vimrc.j2
+    dest: "{{ item }}/.vimrc"
+  with_items: "{{ homedirs }}"
+  tags:
+    - vim
+
+- debug:
+    msg: Run ':PluginInstall' vim command manually to install plugins
+  tags:
+    - vim
+

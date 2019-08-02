@@ -1,6 +1,6 @@
 [user]
-	email = sergey.pakhomov.89@gmail.com
-	name = Sergey Pakhomov
+	email = {{ git.email }}
+	name = {{ git.name }}
 [credential]
 	helper = cache --timeout=259200
 [alias]
@@ -15,14 +15,8 @@
         dump = cat-file -p
 	rh = reset --hard
 [push]
-	default = matching # или simple как будет в версии 2.0
+	default = simple # matching < 2.0 || simple >= 2.0
 [core]
 	editor = vim
 	quotepath = false # решение проблем с русскими буквами файлов
 
-[url "git://anongit.kde.org/"]
-	insteadOf = kde:
-[url "ssh://git@git.kde.org/"]
-	pushInsteadOf = kde:
-[url "git@git.kde.org:"]
-	pushInsteadOf = kde:

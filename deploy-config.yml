@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: yes
+  become: true
+  vars:
+    homedirs:
+      - /root
+      - /home/user
+    git:
+      email: "sergey.pakhomov.89@gmail.com"
+      name: "Sergey Pakhomov"
+  roles:
+    - vim
+    - tmux
+    - git

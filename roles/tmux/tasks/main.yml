@@ -1,0 +1,31 @@
+- name: Install packages (dnf)
+  dnf:
+    name: ['tmux']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'dnf'
+  tags:
+    - tmux
+
+- name: Install packages (yum)
+  yum:
+    name: ['tmux']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'yum'
+  tags:
+    - tmux
+
+- name: Install packages (apt)
+  apt:
+    name: ['tmux']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'apt'
+  tags:
+    - tmux
+
+- name: Install tmux.conf
+  template:
+    src: .tmux.conf.j2
+    dest: "{{ item }}/.tmux.conf"
+  with_items: "{{ homedirs }}"
+  tags:
+    - tmux

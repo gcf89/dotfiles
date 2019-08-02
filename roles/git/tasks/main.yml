@@ -1,0 +1,31 @@
+- name: Install packages (dnf)
+  dnf:
+    name: ['git']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'dnf'
+  tags:
+    - git
+
+- name: Install packages (yum)
+  yum:
+    name: ['git']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'yum'
+  tags:
+    - git
+
+- name: Install packages (apt)
+  apt:
+    name: ['git']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'apt'
+  tags:
+    - git
+
+- name: Install gitconfig
+  template:
+    src: .gitconfig.j2
+    dest: "{{ item }}/.gitconfig"
+  with_items: "{{ homedirs }}"
+  tags:
+    - git

@@ -2,21 +2,29 @@ set -g default-terminal "screen-256color"
 set -g history-limit 10000
 # bind-key C-y save-buffer /tmp/tmux-buffer \; run-shell "cat /tmp/tmux-buffer | xclip"
 
-set-window-option -g clock-mode-colour cyan
-set-window-option -g clock-mode-style 24
+#set-window-option -g clock-mode-colour cyan
+#set-window-option -g clock-mode-style 24
+#
+#set-option -g status-utf8 on
+#set-option -g status-justify right
+#set-option -g status-bg black
+#set-option -g status-fg cyan
+#set-option -g status-interval 5
+#set-option -g status-left-length 30
+#set-option -g status-left '#[fg=magenta]» #[fg=blue,bold]#T#[default]'
+#set-option -g status-right '#[fg=cyan]»» #[fg=blue,bold]###S #[fg=magenta]%R %m-%d#(acpi | cut -d ',' -f 2)#[default]'
+#set-option -g visual-activity on
+#set-window-option -g monitor-activity on
+#set-window-option -g window-status-current-fg white
+#set-option -g status-left "#{pane_current_path}"
 
-set-option -g status-utf8 on
-set-option -g status-justify right
-set-option -g status-bg black
-set-option -g status-fg cyan
-set-option -g status-interval 5
-set-option -g status-left-length 30
-set-option -g status-left '#[fg=magenta]» #[fg=blue,bold]#T#[default]'
-set-option -g status-right '#[fg=cyan]»» #[fg=blue,bold]###S #[fg=magenta]%R %m-%d#(acpi | cut -d ',' -f 2)#[default]'
-set-option -g visual-activity on
-set-window-option -g monitor-activity on
-set-window-option -g window-status-current-fg white
-set-option -g status-left "#{pane_current_path}"
+# https://gist.github.com/dcai/a2e7ca940babda0c7137
+# https://gist.github.com/atelic/e6fffc31482625cc4e0c
+# https://github.com/gpakosz/.tmux
+
+##
+# Friendly tmux for vim
+##
 
 #Prefix is Ctrl-a
 set -g prefix C-a
