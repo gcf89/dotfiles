@@ -4,7 +4,7 @@ terminal-title-style='small'
 window-style='borderless'
 
 [keybindings]
-app-preferences='<Primary><Shift>o'
+app-preferences='<Primary><Shift>i'
 session-name='F10'
 session-open='disabled'
 terminal-reset-and-clear='F12'

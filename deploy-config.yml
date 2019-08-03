@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
-  gather_facts: yes
-  become: true
+  #gather_facts: yes
+  #become: true
   vars:
     users:
       - name: 'root'
@@ -13,6 +13,8 @@
       email: "sergey.pakhomov.89@gmail.com"
       name: "Sergey Pakhomov"
   roles:
+    - git
+    - vim
     - tmux
-      #    - git
-    #- vim
+    - tilix
+    - screen
