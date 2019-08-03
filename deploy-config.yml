@@ -3,13 +3,16 @@
   gather_facts: yes
   become: true
   vars:
-    homedirs:
-      - /root
-      - /home/user
+    users:
+      - name: 'root'
+        homedir: '/root'
+      - name: 'user'
+        homedir: '/home/user'
     git:
+      #TODO: To hide sensitive data use ansible vault
       email: "sergey.pakhomov.89@gmail.com"
       name: "Sergey Pakhomov"
   roles:
-    - vim
     - tmux
-    - git
+      #    - git
+    #- vim

@@ -25,7 +25,17 @@
 - name: Install tmux.conf
   template:
     src: .tmux.conf.j2
-    dest: "{{ item }}/.tmux.conf"
-  with_items: "{{ homedirs }}"
+    dest: "{{ item.homedir }}/.tmux.conf"
+  with_items: "{{ users }}"
+  tags:
+    - tmux
+
+- name: Set perms
+  file:
+    path: "{{ item.homedir }}/.tmux.conf"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0644'
+  with_items: "{{ users }}"
   tags:
     - tmux

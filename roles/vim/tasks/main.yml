@@ -32,15 +32,25 @@
   git:
     repo: https://github.com/gmarik/Vundle.vim.git
     dest: "{{ item }}/.vim/bundle/Vundle.vim"
-  with_items: "{{ homedirs }}"
+  with_items: "{{ users }}"
   tags:
     - vim
 
 - name: Install vimrc
   template:
     src: .vimrc.j2
-    dest: "{{ item }}/.vimrc"
-  with_items: "{{ homedirs }}"
+    dest: "{{ item.homedir }}/.vimrc"
+  with_items: "{{ users }}"
+  tags:
+    - vim
+
+- name: Set perms
+  file:
+    path: "{{ item.homedir }}/.vimrc"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0644'
+  with_items: "{{ users }}"
   tags:
     - vim
 

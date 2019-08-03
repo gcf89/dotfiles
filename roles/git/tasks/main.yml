@@ -25,7 +25,17 @@
 - name: Install gitconfig
   template:
     src: .gitconfig.j2
-    dest: "{{ item }}/.gitconfig"
-  with_items: "{{ homedirs }}"
+    dest: "{{ item.homedir }}/.gitconfig"
+  with_items: "{{ users }}"
+  tags:
+    - git
+
+- name: Set perms
+  file:
+    path: "{{ item.homedir }}/.gitconfig"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0644'
+  with_items: "{{ users }}"
   tags:
     - git
