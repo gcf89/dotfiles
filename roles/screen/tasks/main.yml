@@ -1,0 +1,41 @@
+- name: Install packages (dnf)
+  dnf:
+    name: ['screen']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'dnf'
+  tags:
+    - screen
+
+- name: Install packages (yum)
+  yum:
+    name: ['screen']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'yum'
+  tags:
+    - screen
+
+- name: Install packages (apt)
+  apt:
+    name: ['screen']
+    state: latest
+  when: vars.ansible_facts.pkg_mgr == 'apt'
+  tags:
+    - screen
+
+- name: Install screenrc
+  template:
+    src: .screenrc.j2
+    dest: "{{ item.homedir }}/.screenrc"
+  with_items: "{{ users }}"
+  tags:
+    - screen
+
+- name: Set perms
+  file:
+    path: "{{ item.homedir }}/.screenrc"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0644'
+  with_items: "{{ users }}"
+  tags:
+    - screen
