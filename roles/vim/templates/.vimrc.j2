@@ -260,6 +260,9 @@ let g:pymode_options_colorcolumn = 0
 "=====================================================
 " User hotkeys
 "=====================================================
+" Toggle paste mode
+set pastetoggle=<F12>
+
 " Easier moving of code blocks
 vnoremap < <gv " Shift+> keys
 vnoremap > >gv " Shift+< keys
@@ -307,7 +310,8 @@ nnoremap <M-]> :vertical resize -5<cr>
 inoremap <C-space> <C-x><C-o>
 
 " Generate and insert UUID4 into code by <F12> key
-nnoremap <F12> :call InsertUUID4()<CR>
+" Disabled in favour to 'pastetoggle'
+" nnoremap <F12> :call InsertUUID4()<CR>
 
 " Python code check on PEP8
 autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
