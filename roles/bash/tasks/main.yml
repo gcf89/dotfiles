@@ -1,0 +1,19 @@
+- name: Set custom PS1
+  become: true
+  lineinfile:
+    path: "{{ item.homedir }}/.bashrc"
+    line: "{{ item.ps1 }}"
+  with_items: "{{ users }}"
+  tags:
+    - bash
+
+- name: Set perms
+  become: true
+  file:
+    path: "{{ item.homedir }}/.bashrc"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: '0644'
+  with_items: "{{ users }}"
+  tags:
+    - bash

@@ -6,8 +6,10 @@
     users:
       - name: 'root'
         homedir: '/root'
+        ps1: "export PS1='\\[\\033[01;31m\\]#\\[\\033[00m\\] '" # red #
       - name: 'user'
         homedir: '/home/user'
+        ps1: "export PS1='\\[\\033[01;32m\\]$\\[\\033[00m\\] '" # green $
     git:
       #TODO: To hide sensitive data use ansible vault
       email: "sergey.pakhomov.89@gmail.com"
@@ -18,3 +20,4 @@
     - tmux
     - tilix
     - screen
+    - bash
