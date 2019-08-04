@@ -1,83 +1,82 @@
-set -g default-terminal "screen-256color"
-set -g history-limit 10000
-# bind-key C-y save-buffer /tmp/tmux-buffer \; run-shell "cat /tmp/tmux-buffer | xclip"
+### set new prefix key
+set -g prefix C-q
 
-#set-window-option -g clock-mode-colour cyan
-#set-window-option -g clock-mode-style 24
-#
-#set-option -g status-utf8 on
-#set-option -g status-justify right
-#set-option -g status-bg black
-#set-option -g status-fg cyan
-#set-option -g status-interval 5
-#set-option -g status-left-length 30
-#set-option -g status-left '#[fg=magenta]» #[fg=blue,bold]#T#[default]'
-#set-option -g status-right '#[fg=cyan]»» #[fg=blue,bold]###S #[fg=magenta]%R %m-%d#(acpi | cut -d ',' -f 2)#[default]'
-#set-option -g visual-activity on
-#set-window-option -g monitor-activity on
-#set-window-option -g window-status-current-fg white
-#set-option -g status-left "#{pane_current_path}"
-
-# https://gist.github.com/dcai/a2e7ca940babda0c7137
-# https://gist.github.com/atelic/e6fffc31482625cc4e0c
-# https://github.com/gpakosz/.tmux
-
-##
-# Friendly tmux for vim
-##
-
-#Prefix is Ctrl-a
-set -g prefix C-a
-bind C-a send-prefix
+### unbind default prefix key
 unbind C-b
 
-set -sg escape-time 1
-set -g base-index 1
-setw -g pane-base-index 1
+### reload settings
+bind-key R source-file ~/.tmux.conf \; display-message ".tmux.conf reloaded"
 
-#Mouse works as expected
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
+### moving between panes with vim movement keys
+bind h select-pane -L
+bind l select-pane -R
+bind j select-pane -D
+bind k select-pane -U
 
-setw -g monitor-activity on
-set -g visual-activity on
+### easy to remember split pane commands
+bind | split-window -h
+bind - split-window -v
 
-set -g mode-keys vi
+### general
+set -g default-terminal "screen-256color"
 set -g history-limit 10000
+set -g base-index 1
+set -g pane-base-index 1
+setw -g automatic-rename on 
+set -g set-titles on 
+setw -g mode-keys vi
+setw -g monitor-activity on
+set -g aggressive-resize off
+set -g mouse on
+set -g default-terminal screen-256color
+set -g bell-action any
+set -g visual-activity on
+set -g status-interval 1
 
-# y and p as in vim
-bind Escape copy-mode
-unbind p
-bind p paste-buffer
-#bind -t vi-copy 'v' begin-selection
-#bind -t vi-copy 'y' copy-selection
-#bind -t vi-copy 'Space' halfpage-down
-#bind -t vi-copy 'Bspace' halfpage-up
+### status line
+set -g status 1
+set -g status-position bottom
+set -g window-status-format "#{?client_prefix,#[bg=colour1],#[bg=colour4]}#I:#W"
+set -g window-status-current-format "#{?client_prefix,#[bg=colour1],#[bg=colour4]}#I*:#W"
 
-# extra commands for interacting with the ICCCM clipboard
+### top line
+set -g status-bg colour8
+set -g status-justify centre
+
+### top left
+set -g status-left "#{?client_prefix,#[bg=colour1],#[bg=colour4]}[#S]"
+set -g status-left-length 40
+
+### top right
+set -g status-right "#{?client_prefix,#[bg=colour1],#[bg=colour4]} [%H:%M %d/%m]"
+
+### bottom line
+#set -g status-bg[1] colour4
+#set -g status-justify[1] centre
+#set -g status-format[1] "#[bg=colour2][#(id -nu)] #{pane_current_path}"
+#set -g status-style "#[bg=colour2]"
+
+### panes
+set -g pane-active-border-style fg=colour2
+
+### pane status
+setw -g pane-border-status top
+set -g pane-border-format "#{?pane_active,#[bg=colour2]#[fg=colour0],#[bg=colour8]#[fg=colour0]}#(id -nu)@#{pane_title} #{=-40:pane_current_path}"
+
+# copy/paste to/from system clipboard
 bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"
 bind C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
 
-# easy-to-remember split pane commands
-bind | split-window -h
-bind - split-window -v
-unbind '"'
-unbind %
+### custom binding to tmux copy/paste
+#bind 'v' begin-selection \; rectangle-toggle
+#bind -T copy-mode-vi 'v' send -X begin-selection
+#unbind p
+#bind p paste-buffer
+#bind -T copy-mode-vi 'p' send -X paste-buffer
+#bind -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "pbcopy"
+#bind -T copy-mode-vi 'V' send -X select-line
+#bind -T copy-mode-vi 'r' send -X rectangle-toggle
+#bind 'C-v' send -X begin-selection \; send -X rectangle-toggle
+#bind y copy-pipe "xsel -i -p -b"
+#bind p run "xsel -o | tmux load-buffer - ; tmux paste-buffer"
 
-# moving between panes with vim movement keys
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-
-# moving between windows with vim movement keys
-bind -r C-h select-window -t :-
-bind -r C-l select-window -t :+
-
-# resize panes with vim movement keys
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
