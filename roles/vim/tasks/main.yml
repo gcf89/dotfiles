@@ -1,6 +1,6 @@
 - name: Install system packages (dnf)
   dnf:
-    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils', 'ack']
     state: latest
   when: vars.ansible_facts.pkg_mgr == 'dnf'
   tags:
@@ -8,7 +8,7 @@
 
 - name: Install system packages (yum)
   yum:
-    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils', 'ack']
     state: latest
   when: vars.ansible_facts.pkg_mgr == 'yum'
   tags:
@@ -16,7 +16,7 @@
 
 - name: Install system packages (apt)
   apt:
-    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils']
+    name: ['vim-enhanced', 'python2-pip', 'python3-pip', 'gcc', 'make', 'binutils', 'ack']
     state: latest
   when: vars.ansible_facts.pkg_mgr == 'apt'
   tags:
