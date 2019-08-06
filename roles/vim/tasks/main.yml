@@ -31,8 +31,10 @@
 - name: Install Vundle
   git:
     repo: https://github.com/gmarik/Vundle.vim.git
-    dest: "{{ item }}/.vim/bundle/Vundle.vim"
+    dest: "{{ item.homedir }}/.vim/bundle/Vundle.vim"
   with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.homedir }}"
   tags:
     - vim
 
@@ -41,6 +43,8 @@
     src: .vimrc.j2
     dest: "{{ item.homedir }}/.vimrc"
   with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.homedir }}"
   tags:
     - vim
 
@@ -51,6 +55,8 @@
     group: "{{ item.name }}"
     mode: '0644'
   with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.homedir }}"
   tags:
     - vim
 
