@@ -3,3 +3,15 @@ Reload config on the fly:
 
 Exit/Kill/Finish session:
 > kill-session
+
+Copy/Paste
+1. tmux <-> tmux | same process
+use tmux buffers
+2. tmux local <-> gui | tmux remote <-> gui
+C-v paste from gui
+Mid mouse paste from tmux
+C-S-mid-mouse copy from tmux
+C-c copy from gui (default)
+3. !!!  tmux local <-> tmux remote
+C-S-mid-mouse copy from tmux
+S-mid-mouse paste to tmux
