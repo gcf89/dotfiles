@@ -21,6 +21,7 @@ Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
 Plugin 'rosenfeld/conque-term'          " Consoles as buffers
 Plugin 'tpope/vim-surround'             " Parentheses, brackets, quotes, XML tags, and more
 Plugin 'mileszs/ack.vim'                " Programmers alternate to grep
+Plugin 'ctrlpvim/ctrlp.vim'             " CtrlP
 
 "--------------=== Snippets support ===---------------
 Plugin 'garbas/vim-snipmate'            " Snippets manager
@@ -316,6 +317,20 @@ inoremap <C-space> <C-x><C-o>
 
 " Python code check on PEP8
 autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|iso|zip|tar|tar.gz|tgz|rpm)$',
+  \ }
+
+" Ignore files in .gitignore
+"let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = 'find -L %s -type f'
 
 "=====================================================
 " Languages support
