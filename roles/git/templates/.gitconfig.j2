@@ -4,19 +4,21 @@
 [credential]
 	helper = cache --timeout=259200
 [alias]
-        co = checkout
-        ci = commit
-        st = status
-        br = branch
-        brv = branch -vvaa
-        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-        last = log -1
-        type = cat-file -t
-        dump = cat-file -p
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  brv = branch -vvaa
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  last = log -1
+  type = cat-file -t
+  dump = cat-file -p
 	rh = reset --hard
 [push]
 	default = simple # matching < 2.0 || simple >= 2.0
 [core]
 	editor = vim
 	quotepath = false # решение проблем с русскими буквами файлов
+[color]
+  ui = auto
 
