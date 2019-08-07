@@ -330,8 +330,8 @@ let g:ctrlp_custom_ignore = {
 
 " Ignore files in .gitignore
 "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_user_command = 'find -L %s -type f'
-let g:ctrlp_user_command = 'find -L . -path ./.git -prune -o -type f'
+"let g:ctrlp_user_command = 'find -L %s -type f'
+let g:ctrlp_user_command = 'find -L %s -path "*.git" -prune -o -type f'
 
 "=====================================================
 " Languages support
