@@ -28,35 +28,54 @@
   tags:
     - vim
 
-- name: Install Vundle
-  git:
-    repo: https://github.com/gmarik/Vundle.vim.git
-    dest: "{{ item.homedir }}/.vim/bundle/Vundle.vim"
+- name: Stat homedirs
+  stat:
+    path: "{{ item.homedir }}"
   with_items: "{{ users }}"
   loop_control:
     label: "{{ item.homedir }}"
+  register: reg_stat_perms
+  tags:
+    - vim
+
+- name: Install Vundle
+  git:
+    repo: https://github.com/gmarik/Vundle.vim.git
+    dest: "{{ item.0.homedir }}/.vim/bundle/Vundle.vim"
+  with_together:
+    - "{{ users }}"
+    - "{{ reg_stat_perms.results }}"
+  when: item.1.stat.exists
+  loop_control:
+    label: "{{ item.0.homedir }}"
   tags:
     - vim
 
 - name: Install vimrc
   template:
     src: .vimrc.j2
-    dest: "{{ item.homedir }}/.vimrc"
-  with_items: "{{ users }}"
+    dest: "{{ item.0.homedir }}/.vimrc"
+  with_together:
+    - "{{ users }}"
+    - "{{ reg_stat_perms.results }}"
+  when: item.1.stat.exists
   loop_control:
-    label: "{{ item.homedir }}"
+    label: "{{ item.0.homedir }}"
   tags:
     - vim
 
 - name: Set perms
   file:
-    path: "{{ item.homedir }}/.vimrc"
-    owner: "{{ item.name }}"
-    group: "{{ item.name }}"
+    path: "{{ item.0.homedir }}/.vimrc"
+    owner: "{{ item.0.name }}"
+    group: "{{ item.0.name }}"
     mode: '0644'
-  with_items: "{{ users }}"
+  with_together:
+    - "{{ users }}"
+    - "{{ reg_stat_perms.results }}"
+  when: item.1.stat.exists
   loop_control:
-    label: "{{ item.homedir }}"
+    label: "{{ item.0.homedir }}"
   tags:
     - vim
 

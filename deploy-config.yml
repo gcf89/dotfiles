@@ -10,6 +10,9 @@
       - name: 'user'
         homedir: '/home/user'
         ps1: "export PS1='\\[\\033[01;32m\\]$\\[\\033[00m\\] '" # green $
+      - name: 'pahomov'
+        homedir: '/home/pahomov'
+        ps1: "export PS1='\\[\\033[01;32m\\]$\\[\\033[00m\\] '" # green $
     git:
       #TODO: To hide sensitive data use ansible vault
       email: "sergey.pakhomov.89@gmail.com"
