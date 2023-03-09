@@ -1,0 +1,17 @@
+# finished tasks without test coverage
+project = "xxx" AND sprint in openSprints() AND status in (Resolved, Closed) AND assignee in (user1, user2) \
+AND NOT (issue in hasAnyLinkedTestCycleWithAnyLastTestExecutionResult(Pass) OR issue in hasTestCoverage())
+
+# changed last 18 hours
+project = xxx AND updated >= -18h
+
+# last viewed
+project = "xxx" AND lastViewed >= -1d
+
+# active tasks
+project = "xxx" AND sprint in openSprints() AND status not in (Resolved, Closed, Canceled) AND assignee in (user1, user2) \
+ORDER BY assignee ASC, priority DESC, status DESC
+
+# major tasks
+project = "xxx" AND sprint in openSprints() AND status not in (Resolved, Closed, Canceled) AND priority in (Major, Critical, Blocker) \
+AND assignee in (user1, user2) ORDER BY assignee ASC, priority DESC, status DESC
