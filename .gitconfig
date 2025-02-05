@@ -1,0 +1,58 @@
+[user]
+    email = NODATA
+    name = NODATA
+
+[credential]
+    helper = cache --timeout=259200
+
+[alias]
+    d = diff
+    co = checkout
+    cob = checkout -b
+    ci = commit
+    s = status
+    st = status
+
+    rh = reset --hard
+
+    br = branch
+    brv = branch -vvaa
+
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate --no-merges
+    h = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate --no-merges
+    histm = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate 
+    hm = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate 
+    lp = log -p
+
+    last = log -1
+    type = cat-file -t
+    dump = cat-file -p
+
+[push]
+    default = simple # matching < 2.0 || simple >= 2.0
+    followTags = true
+    autoSetupRemote = true
+
+[core]
+    editor = vim
+    quotepath = false # решение проблем с русскими буквами файлов
+    #fileMode = true
+    
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+
+[http]
+    sslVerify = false
+
+[gc]
+    reflogExpire = 200
+    reflogExpireUnreachable = 90
+
+[diff]
+    tool = /usr/bin/meld
+
