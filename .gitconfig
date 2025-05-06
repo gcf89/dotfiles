@@ -36,7 +36,7 @@
 [core]
     editor = vim
     quotepath = false # решение проблем с русскими буквами файлов
-    #fileMode = true
+    fileMode = false
     
 [color]
     diff = auto
