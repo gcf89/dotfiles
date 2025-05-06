@@ -1,0 +1,5 @@
+mkdir -p ~/.config/lf
+
+cp * ~/.config/lf
+
+echo 'alias lf=\'EDITOR=vim lf\'' >> ~/.bash_profile
