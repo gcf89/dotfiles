@@ -193,6 +193,8 @@ alias egrep='egrep --color=always'
 # проброс цветов через pipe
 alias less='less -R'
 
+alias lf='EDITOR=vim lf'
+
 # Перемещения
 alias gh='cd ~'
 alias gd='cd ~/Downloads'
