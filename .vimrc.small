@@ -1,0 +1,186 @@
+set nocompatible " be iMproved, required
+filetype off     " required
+
+"================================================================================
+" Usage
+"================================================================================
+
+" VIMGREP + QUICKFIX
+" allows to find patterns in % or * and populate extra buffer with links
+" :vimgrep /pattern/g % or <file>
+
+" REREAD CONFIG file while editing it
+" :so %
+
+" filetype change (for vim-commentary plugin i.e.)
+" set filetype=html
+
+filetype on
+filetype plugin on
+filetype plugin indent on
+
+"=====================================================
+" General settings
+"=====================================================
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+set backspace=indent,eol,start
+" This must happen before the syntax system is enabled
+aunmenu Help.
+aunmenu Window.
+let no_buffers_menu=1
+set mousemodel=popup
+
+" Activate a permanent ruler and add line highlightng as well as numbers.
+" Also disable the sucking pydoc preview window for the omni completion
+" and highlight current line and disable the blinking cursor.
+set ruler
+set completeopt-=preview
+set gcr=a:blinkon0
+if has("gui_running")
+    set cursorline
+endif
+set ttyfast
+
+colorscheme desert
+" colorscheme atom
+" colorscheme OceanicNext
+" set guifont=Consolas:h13
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+set guifont=Mono\ 11
+
+" Enable Syntax Colors
+" in GUI mode we go with fruity and Monaco 13
+" in CLI mode myterm looks better (fruity is GUI only)
+syntax on
+if has("gui_running")
+    " set macmeta " comment this line if you're not using Mac OS
+    set lines=50 columns=125
+endif
+" special settings for vim
+if has("mac")
+    let macvim_hig_shift_movement = 1
+endif
+
+tab sball
+set switchbuf=useopen
+
+" Use system clipboard
+set clipboard=unnamedplus
+
+" Customize the wildmenu
+set wildmenu
+set wildignore+=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class,*/*.dSYM/*,*.dylib
+set wildmode=list:full
+
+" Don't bell and blink
+set visualbell t_vb=    " turn off error beep/flash
+set novisualbell        " turn off visual bell
+set enc=utf-8           " utf-8 default encoding
+set ls=2                " always show status bar
+set incsearch           " incremental search
+set hlsearch            " highlighted search results
+set nu                  " line numbers
+set scrolloff=5         " keep some more lines for scope
+set showmatch           " show matching brackets/parenthesis
+set matchtime=0         " don't blink when matching
+
+" Swaps and backups
+if has("win32") || has("win64")
+    set dir=$TMP
+    set backupdir=$TMP
+else
+    set dir=/tmp
+    set backupdir=/tmp
+endif
+
+" Hide some panels
+set guioptions-=m  " remove menu bar
+set guioptions-=T   " remove toolbar
+set guioptions-=r  " remove right-hand scroll bar
+
+" Tab settings
+" количество пробелов, которыми символ табуляции отображается в тексте
+set tabstop=4
+" количество пробелов, которыми символ табуляции отображается при добавлении
+set softtabstop=4
+" регулирование ширины отступов в пробелах, добавляемых командами >> и <<
+set shiftwidth=4
+" нажатие Tab в начале строки приведет к добавлению отступа, ширина которого соответствует shiftwidth
+set smarttab
+" в режиме вставки заменяет символ табуляции на соответствующее количество пробелов
+set expandtab
+" копирует отступы с текущей строки при добавлении новой + автоматически выставляет отступы в «нужных» местах
+set smartindent
+
+"=====================================================
+" User hotkeys
+"=====================================================
+" Toggle paste mode
+set pastetoggle=<F12>
+
+" Easier moving of code blocks
+vnoremap < <gv " Shift+> keys
+vnoremap > >gv " Shift+< keys
+
+" Backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+" CTRL-Z is Undo
+" noremap <C-z> u
+" inoremap <C-z> <C-O>u
+
+" CTRL-Y is Redo
+noremap <C-y> <C-R>
+inoremap <C-y> <C-O><C-R>
+
+" CTRL-A is Select all
+"noremap <C-a> gggH<C-O>G
+"inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
+"cnoremap <C-a> <C-C>gggH<C-O>G
+"onoremap <C-a> <C-C>gggH<C-O>G
+"snoremap <C-a> <C-C>gggH<C-O>G
+"xnoremap <C-a> <C-C>ggVG
+
+" CTRL-S is Quicksave command
+noremap <C-s> :update<CR>
+vnoremap <C-s> <C-C>:update<CR>
+inoremap <C-s> <C-O>:update<CR>
+
+" Settings for buffers
+map <C-q> :bd<CR>         " close current buffer
+noremap <C-Right> :bn<CR> " move to next buffer
+noremap <C-Left> :bp<CR>  " move to previous buffer
+
+" Easier split navigations
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
+
+" Easier change size for splitted windows
+nnoremap <M-[> :vertical resize +5<cr>
+nnoremap <M-]> :vertical resize -5<cr>
+
+" Activate autocomplete at <Ctrl+Space>
+inoremap <C-space> <C-x><C-o>
+
+
+" --- Vim ---
+autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+
+" --- template language support (SGML / XML too) ---
+autocmd FileType xml,html,htmljinja,htmldjango setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,htmljinja,htmldjango imap <buffer> <c-e> <Plug>SparkupExecute
+autocmd FileType html,htmljinja,htmldjango imap <buffer> <c-l> <Plug>SparkupNext
+autocmd FileType htmljinja setlocal commentstring={#\ %s\ #}
+let html_no_rendering=1
+let g:syntastic_html_checkers = []
+
+" --- Yaml ---
+autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+
