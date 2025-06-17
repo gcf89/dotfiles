@@ -73,6 +73,7 @@ function prompt_command {
 	local GIT_BRANCH=
 	local GIT_DIRTY=
 	local PWDNAME=$PWD
+    local LF_MARKER=
 
 	# beautify working directory name
 	if [[ "${HOME}" == "${PWD}" ]]; then
@@ -80,6 +81,10 @@ function prompt_command {
 	elif [[ "${HOME}" == "${PWD:0:${#HOME}}" ]]; then
 		PWDNAME="~${PWD:${#HOME}}"
 	fi
+
+    if [[ ! -z "$LF_LEVEL" ]]; then
+        LF_MARKER="[lf:$LF_LEVEL]"
+    fi
 
 	# parse git status and get git variables
 	if [[ ! -z $PS1_GIT_BIN ]]; then
@@ -109,7 +114,7 @@ function prompt_command {
 	[[ ! -z $VIRTUAL_ENV ]] && PS1_VENV=" (venv: ${VIRTUAL_ENV#$WORKON_HOME})"
 
 	# calculate prompt length
-	local PS1_length=$((${#USER}+${#LOCAL_HOSTNAME}+${#PWDNAME}+${#PS1_GIT}+${#PS1_VENV}+${#JOBS}+3))
+	local PS1_length=$((${#LF_MARKER}+${#USER}+${#LOCAL_HOSTNAME}+${#PWDNAME}+${#PS1_GIT}+${#PS1_VENV}+${#JOBS}+3))
 	local FILL=
 
 	# if length is greater, than terminal width
@@ -140,7 +145,7 @@ function prompt_command {
 
 
 	# set new color prompt
-	PS1="${color_user}${USER}${color_off}@${color_yellow}${LOCAL_HOSTNAME}${color_off}:${color_green}${PWDNAME}${color_off}${PS1_GIT}${PS1_VENV}${JOBS} ${FILL}\n➜ "
+	PS1="${color_user}${LF_MARKER}${USER}${color_off}@${color_yellow}${LOCAL_HOSTNAME}${color_off}:${color_green}${PWDNAME}${color_off}${PS1_GIT}${PS1_VENV}${JOBS} ${FILL}\n➜ "
 
 	# get cursor position and add new line if we're not in first column
 	# cool'n'dirty trick (http://stackoverflow.com/a/2575525/1164595)
@@ -203,3 +208,4 @@ alias gd='cd ~/Downloads'
 alias gti='git'
 alias got='git'
 
+alias sbemp0003='ssh sbemp_dev@tklds-sbemp0003.delta.sbrf.ru'
