@@ -107,7 +107,8 @@ function prompt_command {
 		fi
 	fi
 
-    JOBS=$(jobs | awk '{print $1}')
+    JOBS=$(jobs | awk '{print $1}' | tr -d '[]+')
+    JOBS="[j:${JOBS}]"
 
 	# build b/w prompt for git and virtual env
 	[[ ! -z $GIT_BRANCH ]] && PS1_GIT=" (git: ${GIT_BRANCH})"
@@ -145,7 +146,7 @@ function prompt_command {
 
 
 	# set new color prompt
-	PS1="${color_user}${LF_MARKER}${USER}${color_off}@${color_yellow}${LOCAL_HOSTNAME}${color_off}:${color_green}${PWDNAME}${color_off}${PS1_GIT}${PS1_VENV}${JOBS} ${FILL}\n➜ "
+	PS1="${color_yellow}${LF_MARKER}${JOBS}${color_off}${color_user}${USER}${color_off}@${color_yellow}${LOCAL_HOSTNAME}${color_off}:${color_green}${PWDNAME}${color_off}${PS1_GIT}${PS1_VENV} ${FILL}\n➜ "
 
 	# get cursor position and add new line if we're not in first column
 	# cool'n'dirty trick (http://stackoverflow.com/a/2575525/1164595)
