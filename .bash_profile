@@ -108,7 +108,9 @@ function prompt_command {
 	fi
 
     JOBS=$(jobs | awk '{print $1}' | tr -d '[]+')
-    JOBS="[j:${JOBS}]"
+    if [[ ! -z "$JOBS" ]]; then
+        JOBS="[j:${JOBS}]"
+    fi
 
 	# build b/w prompt for git and virtual env
 	[[ ! -z $GIT_BRANCH ]] && PS1_GIT=" (git: ${GIT_BRANCH})"
