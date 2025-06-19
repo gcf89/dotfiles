@@ -54,7 +54,7 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	# set user color
 	case `id -u` in
 		0) color_user=$color_red ;;
-		*) color_user=$color_green ;;
+		*) color_user=$color_gray ;;
 	esac
 fi
 
@@ -170,6 +170,8 @@ export PROMPT_COMMAND=prompt_command
 # set new b/w prompt (will be overwritten in 'prompt_command' later for color prompt)
 export PS1='\u@${LOCAL_HOSTNAME}:\w\$ '
 
+export PATH="$HOME/bin:$PATH"
+
 # Сокращения
 alias rchown='sudo chown -R ${SUDO_USER}'
 alias rgrep='2>/dev/null grep -REIn'
@@ -212,3 +214,4 @@ alias gti='git'
 alias got='git'
 
 alias sbemp0003='ssh sbemp_dev@tklds-sbemp0003.delta.sbrf.ru'
+
