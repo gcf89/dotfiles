@@ -388,6 +388,16 @@ autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 " WARN: possible broken config
 " autocmd FileType jinja setlocal commentstring=
 
+" Активирует переключение языка комбинацией Ctrl+l
+" При выхохе из режима вставки в нормальный режим происходит
+" автоматическое переключение на английскую раскладку
+" Поэтому команды можно вводить сразу
+" Не затрагивает системную раскладку
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+inoremap <c-l> <c-^>
+highlight lCursor guifg=NONE guibg=Cyan
 
 "================================================================================
 " User functions
