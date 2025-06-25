@@ -40,12 +40,12 @@ color_user=
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	color_is_on=true
 	color_black="\[$(/usr/bin/tput setaf 0)\]"
-	color_red="\[$(/usr/bin/tput setaf 1)\]"
+	color_red="\[$(/usr/bin/tput setaf 1; /usr/bin/tput bold)\]"
 	color_green="\[$(/usr/bin/tput setaf 2)\]"
-	color_yellow="\[$(/usr/bin/tput setaf 3)\]"
+	color_yellow="\[$(/usr/bin/tput setaf 3; /usr/bin/tput bold)\]"
 	color_blue="\[$(/usr/bin/tput setaf 6)\]"
 	color_white="\[$(/usr/bin/tput setaf 7)\]"
-	color_gray="\[$(/usr/bin/tput setaf 8)\]"
+	color_gray="\[$(/usr/bin/tput setaf 8; /usr/bin/tput bold)\]"
 	color_off="\[$(/usr/bin/tput sgr0)\]"
 
 	color_error="$(/usr/bin/tput setab 1)$(/usr/bin/tput setaf 7)"
