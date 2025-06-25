@@ -170,7 +170,7 @@ export PROMPT_COMMAND=prompt_command
 # set new b/w prompt (will be overwritten in 'prompt_command' later for color prompt)
 export PS1='\u@${LOCAL_HOSTNAME}:\w\$ '
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/bin/work:$PATH"
 
 # Сокращения
 alias rchown='sudo chown -R ${SUDO_USER}'
