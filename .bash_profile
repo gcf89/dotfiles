@@ -170,7 +170,11 @@ export PROMPT_COMMAND=prompt_command
 # set new b/w prompt (will be overwritten in 'prompt_command' later for color prompt)
 export PS1='\u@${LOCAL_HOSTNAME}:\w\$ '
 
-export PATH="$HOME/bin:$HOME/bin/work:$PATH"
+# При включенном fapolicyd так работать не будет, т.к. в каталогах линки
+# Скрипты должны быть скопированы в каталог work, поэтому полный PATH
+# будем задавать в .bashrc
+# Также необходимо делать systemctl restart fapolicyd при измененеии файлов в work
+#export PATH="$HOME/bin:$HOME/bin/work:$PATH"
 
 # Сокращения
 alias rchown='sudo chown -R ${SUDO_USER}'
