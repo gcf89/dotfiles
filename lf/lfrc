@@ -131,6 +131,7 @@ map i push A<a-b><a-b><a-f> # before extension
 map a push A<a-b> # after extension
 map B bulkrename
 map b $setbg $f
+map <c-b> push $bash<enter>
 
 map <c-e> down
 map <c-y> up
