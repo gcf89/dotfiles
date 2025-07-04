@@ -217,5 +217,3 @@ alias gd='cd ~/Downloads'
 alias gti='git'
 alias got='git'
 
-alias sbemp0003='ssh sbemp_dev@tklds-sbemp0003.delta.sbrf.ru'
-
