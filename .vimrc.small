@@ -65,6 +65,9 @@ if has("mac")
     let macvim_hig_shift_movement = 1
 endif
 
+autocmd BufNewFile,BufRead Jenkinsfile set syntax=groovy
+autocmd BufNewFile,BufRead *.jenkinsfile set syntax=groovy
+
 tab sball
 set switchbuf=useopen
 
