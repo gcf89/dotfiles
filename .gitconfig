@@ -10,8 +10,10 @@
     co = checkout
     cob = checkout -b
     ci = commit
+    cim = commit -m
     s = status
     st = status
+    cp = cherry-pick
 
     rh = reset --hard
 
@@ -56,3 +58,5 @@
 [diff]
     tool = /usr/bin/meld
 
+[pull]
+	ff = only
