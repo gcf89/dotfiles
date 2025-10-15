@@ -185,7 +185,6 @@ alias cp='cp -vi'
 alias rm='rm -vi'
 alias s='sudo -s'
 alias mkdirp='mkdir -p'
-alias g='grep'
 
 alias lsd='find . -maxdepth 1 -type d -printf "%#m %-10u %-10g %AF %Ar %p\n" | sort'
 alias lsf='find . -maxdepth 1 -type f -printf "%#m %-10u %-10g %AF %Ar %p\n" | sort'
@@ -216,4 +215,5 @@ alias gd='cd ~/Downloads'
 # Очепятки
 alias gti='git'
 alias got='git'
+alias g='git'
 
