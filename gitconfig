@@ -1,6 +1,6 @@
 [user]
-    email = NODATA
-    name = NODATA
+    email = 
+    name = 
 
 [credential]
     helper = cache --timeout=259200
@@ -11,20 +11,22 @@
     cob = checkout -b
     ci = commit
     cim = commit -m
+    cia = commit --amend
     s = status
     st = status
-    cp = cherry-pick
 
     rh = reset --hard
 
     br = branch
     brv = branch -vvaa
 
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate --no-merges
     h = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate --no-merges
-    histm = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate 
     hm = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --decorate 
     lp = log -p
+
+    r = rebase
+    rc = rebase --continue
+    ra = rebase --abort
 
     last = log -1
     type = cat-file -t
@@ -47,6 +49,10 @@
     interactive = auto
     ui = true
     pager = true
+[color "branch"]
+    current = yellow
+    local = green
+    remote = cyan
 
 [http]
     sslVerify = false
@@ -58,5 +64,3 @@
 [diff]
     tool = /usr/bin/meld
 
-[pull]
-	ff = only
