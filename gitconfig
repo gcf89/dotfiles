@@ -25,6 +25,7 @@
     lp = log -p
 
     r = rebase
+    ri = rebase -i
     rc = rebase --continue
     ra = rebase --abort
 
